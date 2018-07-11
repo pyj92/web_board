@@ -1,0 +1,36 @@
+<?php
+	require_once("./dbconfig.php");
+	$no = $_GET['no'];
+
+	$sql = 'select title, content, date, hit, id from table_board where no = ' . $no;
+	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Borad_free | Youngjin</title>
+	<link rel="stylesheet" href="./css/normalize.css" />
+	<link rel="stylesheet" href="./css/board.css" />
+</head>
+<body>
+	<article class="boardArticle">
+		<h3>Borad_free_write</h3>
+		<div id="boardView">
+			<h3 id="boardTitle"><?php echo $row['title']?></h3>
+			<div id="boardInfo">
+				<span id="boardID">Writer: <?php echo $row['id']?></span>
+				<span id="boardDate">Date: <?php echo $row['date']?></span>
+				<span id="boardHit">Hit: <?php echo $row['hit']?></span>
+			</div>
+			<div class="btnSet">
+				<a href="./write.php?no=<?php echo $no?>">Modify</a>
+				<a href="./delete.php?no=<?php echo $no?>">Delete</a>
+				<a href="./">List</a>
+			</div>
+			<div id="boardContent"><?php echo $row['content']?></div>
+		</div>
+	</article>
+</body>
+</html>
